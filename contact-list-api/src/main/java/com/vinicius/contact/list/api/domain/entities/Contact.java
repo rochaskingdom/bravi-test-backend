@@ -1,6 +1,5 @@
 package com.vinicius.contact.list.api.domain.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.vinicius.contact.list.api.controller.request.UpdateContactRequest;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,16 +11,13 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.time.OffsetDateTime;
 import java.util.UUID;
