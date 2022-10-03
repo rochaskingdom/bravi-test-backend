@@ -48,7 +48,7 @@ public class ContactServiceImpl implements ContactService {
     @Override
     public Contact update(String uuid, UpdateContactRequest request) {
         var updatedContact = Optional.of(findByUuid(uuid))
-                .map(contact -> contactRepository.save(Contact.toUpdate(contact, request)))
+                .map(contact -> contactRepository.update(Contact.toUpdate(contact, request)))
                 .orElseThrow(() -> new InvalidContactListException("Ocorreu um erro ao tentar atualizar."));
         log.info("Dados do contato alterados com sucesso - [{}]", updatedContact.toString());
         return updatedContact;

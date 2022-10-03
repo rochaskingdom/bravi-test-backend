@@ -11,8 +11,6 @@ public interface PersonRepository {
 
     Optional<Person> findByUuid(String uuid);
 
-    Set<Person> findAllContactList();
-
     Person save(Person person);
 
     Person update(Person person);

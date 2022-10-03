@@ -18,11 +18,6 @@ public class PersonRepositoryImpl implements PersonRepository {
     private final PersonJpaRepository repository;
 
     @Override
-    public Set<Person> findAllContactList() {
-        return repository.listAll();
-    }
-
-    @Override
     public Optional<Person> findByUuid(String uuid) {
         return repository.findByUuid(uuid);
     }

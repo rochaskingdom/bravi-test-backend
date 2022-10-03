@@ -9,12 +9,6 @@ import java.util.Set;
 
 public interface PersonJpaRepository extends JpaRepository<Person, Long> {
 
-    @Query("SELECT DISTINCT p " +
-            "FROM Person p " +
-                "LEFT JOIN FETCH p.contacts " +
-            "ORDER BY p.createdAt DESC ")
-    Set<Person> listAll();
-
     @Query(value = "SELECT id, uuid, name, last_name, created_at, modified_at " +
                 "FROM tb_person " +
             "ORDER BY created_at DESC ", nativeQuery = true)
