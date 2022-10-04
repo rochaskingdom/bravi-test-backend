@@ -1,0 +1,408 @@
+{
+	"info": {
+		"_postman_id": "11a1faa4-3682-4ed0-b4a1-b3d13e966b34",
+		"name": "bravi-test-backend",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "15825731"
+	},
+	"item": [
+		{
+			"name": "Brackets",
+			"item": [
+				{
+					"name": "Brackets - Validated",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/brackets?value=[{()}](){}",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"brackets"
+							],
+							"query": [
+								{
+									"key": "value",
+									"value": "(){}[]",
+									"disabled": true
+								},
+								{
+									"key": "value",
+									"value": "[{()}](){}"
+								},
+								{
+									"key": "value",
+									"value": "[]{()",
+									"disabled": true
+								},
+								{
+									"key": "value",
+									"value": "{[(])}",
+									"disabled": true
+								},
+								{
+									"key": "value",
+									"value": "sdshjk",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Persons",
+			"item": [
+				{
+					"name": "Person - Save",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Set\", function () {",
+									"    var jsonData = JSON.parse(responseBody);",
+									"    postman.setEnvironmentVariable(\"person.uuid\", jsonData.uuid);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Vinicius\",\n    \"lastName\": \"Rocha\",\n    \"contacts\": [\n        {\n            \"phone\": \"61984694958\",\n            \"email\": \"222@222.com\",\n            \"whatsapp\": \"61984694958\"\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8081/persons",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"persons"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Person - Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "localhost:8081/persons/{{person.uuid}}?name=Vinicius Updated&lastName=Rocha Updated",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"persons",
+								"{{person.uuid}}"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Vinicius Updated"
+								},
+								{
+									"key": "lastName",
+									"value": "Rocha Updated"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Person - FindAll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8081/persons",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"persons"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Person -FindByUuid",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8081/persons/{{person.uuid}}",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"persons",
+								"{{person.uuid}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Person - Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Vinicius\",\n    \"lastName\": \"Rocha\",\n    \"contacts\": [\n        {\n            \"phone\": \"61984694958\",\n            \"email\": \"222@222.com\",\n            \"whatsapp\": \"61984694958\",\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8081/persons/{{person.uuid}}",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"persons",
+								"{{person.uuid}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Contact List",
+			"item": [
+				{
+					"name": "Contact List - ListAll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8081/contact-list",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"contact-list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Contact List - FindByPersonUuid",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8081/contact-list/{{person.uuid}}",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"contact-list",
+								"{{person.uuid}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Contacts",
+			"item": [
+				{
+					"name": "Contact - Save",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Set\", function () {",
+									"    var jsonData = JSON.parse(responseBody);",
+									"    postman.setEnvironmentVariable(\"contact.uuid\", jsonData.uuid);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"phone\": \"61984186960\",\n    \"email\": \"funcionou@funcinou.com\",\n    \"whatsapp\": \"61984694958\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8081/contacts/{{person.uuid}}",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"contacts",
+								"{{person.uuid}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Contact - FindAllByPersonUuid",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8081/contacts/person/{{person.uuid}}",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"contacts",
+								"person",
+								"{{person.uuid}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Contact - FindByUuid",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8081/contacts/{{contact.uuid}}",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"contacts",
+								"{{contact.uuid}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Contact - Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "localhost:8081/contacts/{{contact.uuid}}?phone=61984694958&email=updated@updated.com&whatsapp=61984694956",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"contacts",
+								"{{contact.uuid}}"
+							],
+							"query": [
+								{
+									"key": "phone",
+									"value": "61984694958"
+								},
+								{
+									"key": "email",
+									"value": "updated@updated.com"
+								},
+								{
+									"key": "whatsapp",
+									"value": "61984694956"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Contact - Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/contacts/{{contact.uuid}}",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"contacts",
+								"{{contact.uuid}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "City Weather",
+			"item": [
+				{
+					"name": "Weather - FindByCity",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8082/weather?city=Rio de Janeiro",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"weather"
+							],
+							"query": [
+								{
+									"key": "city",
+									"value": "Rio de Janeiro"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
