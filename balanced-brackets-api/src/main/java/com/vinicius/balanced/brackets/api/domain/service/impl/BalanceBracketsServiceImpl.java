@@ -38,8 +38,8 @@ public class BalanceBracketsServiceImpl implements BalanceBracketsService {
         while (brackets.contains("()") || brackets.contains("[]") || brackets.contains("{}")) {
             brackets = brackets
                     .replaceAll("\\(\\)", "")
-                    .replaceAll("\\[\\]", "")
-                    .replaceAll("\\{\\}", "");
+                    .replaceAll("\\[]", "")
+                    .replaceAll("\\{}", "");
         }
         return brackets.isBlank() ? VALID_BRACKETS : INVALID_BRACKETS;
     }
