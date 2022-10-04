@@ -41,12 +41,7 @@ public class BalanceBracketsServiceImpl implements BalanceBracketsService {
                     .replaceAll("\\[\\]", "")
                     .replaceAll("\\{\\}", "");
         }
-
-        if (brackets.isBlank()) {
-            return VALID_BRACKETS;
-        }
-
-        return INVALID_BRACKETS;
+        return brackets.isBlank() ? VALID_BRACKETS : INVALID_BRACKETS;
     }
 
 }
