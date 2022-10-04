@@ -12,29 +12,41 @@ public class BalanceBracketsServiceImpl implements BalanceBracketsService {
 
     @Override
     public String balance(String brackets) {
-        return validateBrackets(brackets);
-    }
-
-    private String validateBrackets(String brackets) {
-        if (isNull(brackets) || brackets.isBlank() || ((brackets.length()%2) != 0)) {
+        if (isNull(brackets) || brackets.isBlank() || ((brackets.length()%2) != 0) || !isValid(brackets)) {
             return INVALID_BRACKETS;
         }
+        return balancedBrackets(brackets);
+    }
 
+    private boolean isValid(String brackets) {
         var bracketsToCharArray = brackets.toCharArray();
-        var isValid = new String(bracketsToCharArray)
+        return new String(bracketsToCharArray)
                 .chars()
-                .allMatch(bracketChar -> verifyBracketChar((char) bracketChar));
-
-        return isValid ? VALID_BRACKETS : INVALID_BRACKETS;
+                .anyMatch(bracketChar -> verifyBracketChar((char) bracketChar));
     }
 
     private boolean verifyBracketChar(char bracketChar) {
-        return bracketChar == '{' ||
+        return (bracketChar == '{' ||
                 bracketChar == '[' ||
                 bracketChar == '(' ||
                 bracketChar == '}' ||
                 bracketChar == ']' ||
-                bracketChar == ')';
+                bracketChar == ')');
+    }
+
+    private String balancedBrackets(String brackets) {
+        while (brackets.contains("()") || brackets.contains("[]") || brackets.contains("{}")) {
+            brackets = brackets
+                    .replaceAll("\\(\\)", "")
+                    .replaceAll("\\[\\]", "")
+                    .replaceAll("\\{\\}", "");
+        }
+
+        if (brackets.isBlank()) {
+            return VALID_BRACKETS;
+        }
+
+        return INVALID_BRACKETS;
     }
 
 }
